@@ -1,6 +1,6 @@
 (function() {
     "use strict";
-    let todoItems;
+    let listItems;
 
     // retrieve data from the localstorage
     retrieveData();
@@ -12,8 +12,8 @@
 
 
     function retrieveData() {
-        const storedData = localStorage.getItem('todoItems');
-        todoItems = JSON.parse(storedData) || [];
+        const storedData = localStorage.getItem('listItems');
+        listItems = JSON.parse(storedData) || [];
     }
 
     function registerPartials() {
@@ -21,13 +21,13 @@
     }
 
     function registerHelpers() {
-        Handlebars.registerHelper('getListDescription', function(todoList) {
-            return todoList.length === 0 ? 'No items added to the list' :
-                todoList.length === 1 ? 'One item in the list' : `${todoList.length} items in the list`;
+        Handlebars.registerHelper('getListDescription', function(list) {
+            return list.length === 0 ? 'No items added to the list' :
+                list.length === 1 ? 'One item in the list' : `${list.length} items in the list`;
 
         });
-        Handlebars.registerHelper('isListEmpty', function(todoList){
-            return todoList.length === 0 ?  'list-description__empty' : 'list-description__not-empty';
+        Handlebars.registerHelper('isListEmpty', function(list){
+            return list.length === 0 ?  'list-description__empty' : 'list-description__not-empty';
         })
     }
 
@@ -36,11 +36,11 @@
         const inputField = document.getElementById('inputText');
         button.addEventListener('click', () => {
             const textValue = inputField.value;
-            const todoItem = {
-                id: todoItems.length,
+            const listItem = {
+                id: listItems.length,
                 label: textValue
             };
-            todoItems.push(todoItem);
+            listItems.push(listItem);
             inputField.value = '';
             renderPage();
         });
@@ -56,9 +56,9 @@
 
     function removeItemHandler(event) {
         const targetId = event.target.id;
-        for (let i = todoItems.length - 1; i >= 0; i--) {
-            if (todoItems[i].id.toString() === targetId.toString()) {
-                todoItems.splice(i, 1);
+        for (let i = listItems.length - 1; i >= 0; i--) {
+            if (listItems[i].id.toString() === targetId.toString()) {
+                listItems.splice(i, 1);
                 break;
             }
         }
@@ -71,7 +71,7 @@
         let compiledTemplate = Handlebars.compile(listContainerTemplate);
 
         let context = {
-            todoItems: todoItems
+            listItems: listItems
         };
 
         let compiledHTML = compiledTemplate(context);
@@ -80,6 +80,6 @@
         registerTemplateListeners();
 
         // save the current data in the localstorage
-        localStorage.setItem('todoItems', JSON.stringify(todoItems));
+        localStorage.setItem('listItems', JSON.stringify(listItems));
     }
 })();
