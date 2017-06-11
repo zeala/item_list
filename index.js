@@ -2,40 +2,31 @@
     "use strict";
     let todoItems;
 
+    // retrieve data from the localstorage
     retrieveData();
+
     registerPartials();
     registerHelpers();
-
-    render();
+    renderPage();
+    registerListeners();
 
 
     function retrieveData() {
-        console.log('---- todoItems ', todoItems);
         const storedData = localStorage.getItem('todoItems');
         todoItems = JSON.parse(storedData) || [];
-        console.log(todoItems);
-    }
-
-    function render() {
-        renderPage();
-        registerListeners();
     }
 
     function registerPartials() {
         Handlebars.registerPartial('item', document.getElementById('item').innerHTML);
-
     }
 
     function registerHelpers() {
-        console.log(' --- register helper called ');
         Handlebars.registerHelper('getListDescription', function(todoList) {
-            console.log(' --- todoList.length : ', todoList.length);
             return todoList.length === 0 ? 'No items added to the list' :
                 todoList.length === 1 ? 'One item in the list' : `${todoList.length} items in the list`;
 
         });
         Handlebars.registerHelper('isListEmpty', function(todoList){
-            console.log(' --- isListEmpty helper, todolist : ', todoList);
             return todoList.length === 0 ?  'list-description__empty' : 'list-description__not-empty';
         })
     }
@@ -76,8 +67,8 @@
 
     function renderPage() {
         let container = document.getElementById('content');
-        let addressTemplate = document.getElementById('address').innerHTML;
-        let compiledTemplate = Handlebars.compile(addressTemplate);
+        let listContainerTemplate = document.getElementById('listContainer').innerHTML;
+        let compiledTemplate = Handlebars.compile(listContainerTemplate);
 
         let context = {
             todoItems: todoItems
