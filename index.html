@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>To do list</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+<h1>ToDo list</h1>
+<div class="container" id="container">
+    <span><input id="inputText"/> <input id='addNewItem' type="button" value='add' /></span>
+    <div id="content"></div>
+</div>
+
+<script id="address" type="text/x-handlebars-template">
+       <span id="description"  class="list-description {{isListEmpty todoItems}}" >
+         {{#getListDescription todoItems}}
+         {{/getListDescription}}
+        </span>
+
+    {{#each todoItems}}
+    {{> item label=label id=id}}
+    {{/each}}
+
+</script>
+
+
+<script id="item" type="text/x-handlebars-template" >
+    <div class="todo-list__item">
+        <label >{{label}}</label><button id={{id}} class='removeButton'>Remove</button>
+    </div>
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+<script src="index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "todo-list",
+  "version": "1.0.0",
+  "description": "a todo list",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "js",
+    "templates",
+    "styling"
+  ],
+  "author": "Elena",
+  "license": "ISC",
+  "dependencies": {
+    "handlebars": "^4.0.10"
+  }
+}
