@@ -1,15 +1,21 @@
+/*
+    @todo
+    The Simple List application still needs implementation of the following:
+    - input validation
+    - duplicate entries validation
+    - unit testing of the utility methods
+
+ */
+
 (function() {
     "use strict";
     let listItems;
 
-    // retrieve data from the localstorage
-    retrieveData();
-
+    retrieveData(); // retrieves data from the localstorage
     registerPartials();
     registerHelpers();
     renderPage();
     registerListeners();
-
 
     function retrieveData() {
         const storedData = localStorage.getItem('listItems');

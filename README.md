@@ -1,1 +1,1 @@
-# item_list
+# Simple list app
